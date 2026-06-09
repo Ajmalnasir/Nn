@@ -1,31 +1,16 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>AR with Camera</title>
+    <title>Floor AR with Shadow</title>
     
     <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
-    
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     
     <style>
-        body, html { 
-            margin: 0; 
-            padding: 0; 
-            width: 100%; 
-            height: 100%; 
-            overflow: hidden; 
-            background-color: #000; 
-            font-family: Arial, sans-serif;
-        }
-        
-        model-viewer { 
-            width: 100vw; 
-            height: 100vh; 
-            display: block; 
-        }
-        
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #000; }
+        model-viewer { width: 100vw; height: 100vh; display: block; }
         #ar-button {
             position: absolute;
             bottom: 24px;
@@ -33,7 +18,6 @@
             transform: translateX(-50%);
             padding: 14px 32px;
             font-size: 16px;
-            font-weight: 500;
             background: #4285f4;
             color: white;
             border: none;
@@ -41,11 +25,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             z-index: 10;
             cursor: pointer;
-            transition: background 0.2s;
-        }
-        
-        #ar-button:active {
-            background: #3367d6;
         }
     </style>
 </head>
@@ -54,19 +33,18 @@
     <model-viewer id="ar-viewer"
         src="3DModel.glb"
         ios-src="3DModel.usdz"
-        alt="3D Model in AR"
+        alt="3D Model"
         ar
         ar-modes="webxr scene-viewer quick-look"
         ar-placement="floor"
         camera-controls
         shadow-intensity="1"
-        environment-image="neutral">
+        shadow-softness="0.8"
+        exposure="1.3"
+        environment-image="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr"
+        scale="1 1 1">
         
-        <!-- User gesture button - required for camera access -->
-        <button slot="ar-button" id="ar-button">Start AR Camera</button>
-        
-        <!-- Loading text -->
-        <div slot="progress-bar">Loading model...</div>
+        <button slot="ar-button" id="ar-button">Place on Floor</button>
     </model-viewer>
 
 </body>
